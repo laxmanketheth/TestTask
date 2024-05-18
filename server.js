@@ -49,6 +49,8 @@ app.post('/weather', async (req, res) => {
             let responsedata = await db
                 .insert(weather_data, ['*'])
                 .into('weather_data');
+
+            //3. Response
             res.status(200).json({ success: true, data: responsedata })
         }
         else (res.status(401).json({ err: 'failed to fetch' }))
