@@ -80,8 +80,13 @@ app.get('/weatherdata', async (req, res) => {
             .where('lat', '=', lat)
             .andWhere('lon', '=', lon);
 
-        //2. Response
-        res.status(200).json({ success: true, data: data });
+        if (data.length > 0) {
+            //2. Response
+            res.status(200).json({ success: true, data: data });
+        }else{
+            //3. response if no such data in database
+            res.status(401).json({err:'such data does not exists in database'})
+        }
 
     } catch (err) {
         //Error response
