@@ -1,9 +1,11 @@
 # Weather Application
 
+## weather API's
+
 1. '/weather'
 - Request Method : POST
 - Purpose: accepts req body and fetches data (based on lat,lon) and then save it to the database.
-- Request: takes and object that contains lat and lon.
+- Request: takes an object that contains lat and lon.
 - Example of Request object:
 
         `````
