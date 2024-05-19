@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  weather-app:
+    image: node:18
+    container_name: weather-app
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: node server.js
+    depends_on:
+      - postgres-db
+  postgres-db:
+    image: postgres:latest
+    container_name: postgres_db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5400:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
