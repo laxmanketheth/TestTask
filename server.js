@@ -21,6 +21,32 @@ app.listen(port, () => {
     console.log(`listening to port ${port}`);
 });
 
+  
+const createSchema = async ()=>{
+
+    try {
+        const tableExists = await db.schema.hasTable('weather_data');
+        if (!tableExists) {
+            await db.schema.createTable('weather_data', table => {
+                table.increments('id');
+                table.integer('sunrise');
+                table.integer('sunset');
+                table.decimal('temp', 6, 2);
+                table.decimal('feels_like', 6, 2);
+                table.integer('pressure');
+                table.integer('humidity');
+                table.decimal('uvi', 5, 2);
+                table.decimal('wind_speed', 5, 2);
+                table.decimal('lat', 7, 4);
+                table.decimal('lon', 7, 4);
+            });
+        }
+    } catch (err) {
+        throw err;
+    }    
+
+}
+ 
 
 /**
  * Purpose: accepts req body and fetches data (based on lat,lon) and then save it to the database.
@@ -49,7 +75,10 @@ app.post('/weather', async (req, res) => {
                 lon: data.coord.lon
             }
             
-            //2. Saving to database
+            //2. Create table schema if it doesn't exist in database
+            await createSchema();
+
+            //3. Saving to database
             let responsedata = await db
                 .insert(weather_data, ['*'])
                 .into('weather_data');
