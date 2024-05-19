@@ -6,13 +6,16 @@ dotenv.config();
 // importing and configuring knex //
 import knex from 'knex';
 import { development } from './knexfile.js';
-const db = knex(development);
+import { production } from './knexfile.js';
+
+const db = knex(production); //Production Settings
+// const db = knex(development); //Development Settings
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 const port = 8080;
-const API_KEY = process.env.API_KEY;
+const API_KEY = process.env.OPEN_WEATHER_API_KEY;
 
 app.listen(port, () => {
     console.log(`listening to port ${port}`);
@@ -45,6 +48,7 @@ app.post('/weather', async (req, res) => {
                 lat: data.coord.lat,
                 lon: data.coord.lon
             }
+            
             //2. Saving to database
             let responsedata = await db
                 .insert(weather_data, ['*'])

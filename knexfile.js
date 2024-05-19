@@ -12,36 +12,18 @@ export const development = {
     database: process.env.DATABASE_NAME,
     user: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
+    host: process.env.DEV_DATABASE_HOST,
     port: process.env.PORT
   }
 };
-export const staging = {
-  client: 'postgresql',
-  connection: {
-    database: 'my_db',
-    user: 'username',
-    password: 'password'
-  },
-  pool: {
-    min: 2,
-    max: 10
-  },
-  migrations: {
-    tableName: 'knex_migrations'
-  }
-};
+
 export const production = {
   client: 'postgresql',
   connection: {
-    database: 'my_db',
-    user: 'username',
-    password: 'password'
-  },
-  pool: {
-    min: 2,
-    max: 10
-  },
-  migrations: {
-    tableName: 'knex_migrations'
+    database: process.env.DATABASE_NAME,
+    user: process.env.DATABASE_USERNAME,
+    password: process.env.DATABASE_PASSWORD,
+    host: process.env.PROD_DATABASE_HOST,
+    port: process.env.PORT
   }
 };
