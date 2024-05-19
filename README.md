@@ -1,4 +1,4 @@
-# weather API's
+# Weather Application
 
 1. '/weather'
 - Request Method : POST
@@ -48,24 +48,19 @@
     ```
     git clone https://github.com/laxmanketheth/TestTask.git
     ```
-2. Install the dependencies:
-    - cd TestTask
-    - npm install
 
-3. Set up environment variables:
-    - Create a `.env` file in the project's root directory.
-    - Add the following variables to the `.env` file:
-     ```
-    DATABASE_USERNAME=your-database-username
-    DATABASE_NAME=your-database-name
-    DATABASE_PASSWORD=database-password
-    PORT=database-port
-    API_KEY = weather-API-key
-     ```
+2. Install Docker:
+    - Install Docker from the official website: https://www.docker.com/get-started/
 
-## Run the server
-	
-   ```
-   node server.js
-   ``` 
+3. Update the .env file with the appropriate values.
+    - Signup on https://openweathermap.org/ and collect your API key.
+    - Update <open-weather-api-key> with the actual API key.
+    - You may use a free api-key : 'd4eb3e41dd3c561eedf2496f3afc3c1e'.
+
+## Run the application using docker compose
+
+    Run the below docker compose command to start the application. 
+    It will start the weather-api(server.js) and postgres database containers.
+    - docker compose up
+
 - Now you can test the API's in the postman. 
